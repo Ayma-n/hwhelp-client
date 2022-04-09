@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect, Context } from 'react'
 import { signInWithPopup, GoogleAuthProvider, User, AuthProvider, OAuthCredential, signOut, onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../FirebaseInit'
+import { useNavigate } from 'react-router-dom';
 
 interface IAuthContext {
     currentUser: any;
@@ -25,12 +26,15 @@ export function GAuthProvider({ children } : any) {
     const [currentUser, setCurrentUser] = useState<User>();
     const googleProvider : GoogleAuthProvider = new GoogleAuthProvider()
 
-    function login() {
-        signInWithPopup(auth, googleProvider)
+    const navigate = useNavigate();
+
+    async function login() {
+        return signInWithPopup(auth, googleProvider)
         .then((result) => {
             const credential : OAuthCredential | null = GoogleAuthProvider.credentialFromResult(result);
             const token : string | undefined = credential?.accessToken;
             setCurrentUser(result.user);
+            navigate("/first-time")
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;

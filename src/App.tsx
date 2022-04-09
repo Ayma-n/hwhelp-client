@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import Home from './Home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { GAuthProvider } from './contexts/AuthContext';
+import FirstTime from './FirstTime';
 
 function App() {
   return (<>
@@ -11,10 +12,10 @@ function App() {
         <GAuthProvider>
         <Routes>
           <Route path="/" element={<Home signedIn={false}></Home>}/>
+          <Route path="/first-time" element={<FirstTime></FirstTime>}/>
         </Routes>
         </GAuthProvider>
       </Router>
-      <Home signedIn={false}></Home>
     </div>
     </>)
     

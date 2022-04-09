@@ -3,6 +3,7 @@ import Button from '@mui/material/Button'
 import './HomeStyle.css'
 
 import { useAuth } from './contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 type HomeProps = {
     signedIn: boolean;
@@ -11,9 +12,11 @@ type HomeProps = {
 export default function Home(props: HomeProps) {
 
     const { login } = useAuth();
+    const navigate = useNavigate()
 
     async function handleLoginPressed() {
         await login();
+        navigate("/first-time");
     }
 
     return (<>
