@@ -9,7 +9,7 @@ interface IAuthContext {
     signout: Function;
 }
 
-interface IUserInfo {
+export interface IUserInfo {
     currentUser: any;
     additionalInfo: any;
 }
