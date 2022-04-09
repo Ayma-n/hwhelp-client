@@ -1,11 +1,20 @@
 import React from 'react';
 import logo from './logo.svg';
 import Home from './Home'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
-  return (
-
-    <Home signedIn={false}></Home>
+  return (<>
+    <div id="App">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home signedIn={false}></Home>}/>
+        </Routes>
+      </Router>
+      <Home signedIn={false}></Home>
+    </div>
+    </>)
+    
 
     // <div className="App">
     //   <header className="App-header">
@@ -23,7 +32,6 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-  );
 }
 
 export default App;
