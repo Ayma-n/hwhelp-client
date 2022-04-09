@@ -20,7 +20,7 @@ export function useAuth() {
     return useContext(AuthContext);
 }
 
-export function AuthProvider({ children } : any) {
+export function GAuthProvider({ children } : any) {
 
     const [currentUser, setCurrentUser] = useState<User>();
     const googleProvider : GoogleAuthProvider = new GoogleAuthProvider()

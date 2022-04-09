@@ -2,17 +2,17 @@ import React from 'react';
 import logo from './logo.svg';
 import Home from './Home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { AuthProvider } from './contexts/AuthContext';
+import { GAuthProvider } from './contexts/AuthContext';
 
 function App() {
   return (<>
     <div id="App">
       <Router>
-        <AuthProvider>
+        <GAuthProvider>
         <Routes>
           <Route path="/" element={<Home signedIn={false}></Home>}/>
         </Routes>
-        </AuthProvider>
+        </GAuthProvider>
       </Router>
       <Home signedIn={false}></Home>
     </div>
