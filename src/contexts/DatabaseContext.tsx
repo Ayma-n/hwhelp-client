@@ -15,8 +15,8 @@ export function useDb() {
 }
 
 export const DatabaseProvider: FC = ({ children }) => {
-  const { currentUser } = useAuth();
-  const [userInfo, setUserInfo] = useState(nullPerson);
+  const { userInfo } = useAuth();
+  const currentUser = userInfo?.currentUser;
 
   function createUser(userObject: any) {
     const profilesRef = collection(db, "/profiles");
