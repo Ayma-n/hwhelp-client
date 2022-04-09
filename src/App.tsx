@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import Home from './Home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { GAuthProvider } from './contexts/AuthContext';
+import { DatabaseProvider } from './contexts/DatabaseContext';
 import FirstTime from './FirstTime';
 
 function App() {
@@ -10,10 +11,12 @@ function App() {
     <div id="App">
       <Router>
         <GAuthProvider>
+          <DatabaseProvider>
         <Routes>
           <Route path="/" element={<Home signedIn={false}></Home>}/>
           <Route path="/first-time" element={<FirstTime></FirstTime>}/>
         </Routes>
+        </DatabaseProvider>
         </GAuthProvider>
       </Router>
     </div>
