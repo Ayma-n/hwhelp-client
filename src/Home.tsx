@@ -11,11 +11,13 @@ type HomeProps = {
 
 export default function Home(props: HomeProps) {
 
-    const { login } = useAuth();
+    const { login, userInfo } = useAuth();
     const navigate = useNavigate()
 
     async function handleLoginPressed() {
         await login();
+        console.log(userInfo?.additionalInfo.isNewUser)
+        //if (userInfo?.additionalInfo.isNewUser) navigate("/first-time");
         navigate("/first-time");
     }
 
