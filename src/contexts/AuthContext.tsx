@@ -1,16 +1,21 @@
 import React, { useContext, useState, useEffect, Context } from 'react'
-import { signInWithPopup, GoogleAuthProvider, User, AuthProvider, OAuthCredential, signOut, onAuthStateChanged } from 'firebase/auth'
+import { signInWithPopup, GoogleAuthProvider, User, AuthProvider, OAuthCredential, signOut, onAuthStateChanged, getAdditionalUserInfo } from 'firebase/auth'
 import { auth } from '../FirebaseInit'
 import { useNavigate } from 'react-router-dom';
 
 interface IAuthContext {
-    currentUser: any;
+    userInfo: IUserInfo | undefined;
     login: Function;
     signout: Function;
 }
 
+interface IUserInfo {
+    currentUser: any;
+    additionalInfo: any;
+}
+
 const defaultState : IAuthContext = {
-    currentUser: null,
+    userInfo: {currentUser: null, additionalInfo: null},
     login: () => null,
     signout: () => null,
 }
@@ -23,6 +28,8 @@ export function useAuth() {
 
 export function GAuthProvider({ children } : any) {
 
+    const [userInfo, setUserInfo] = useState<IUserInfo>();
+
     const [currentUser, setCurrentUser] = useState<User>();
     const googleProvider : GoogleAuthProvider = new GoogleAuthProvider()
 
@@ -32,9 +39,8 @@ export function GAuthProvider({ children } : any) {
         return signInWithPopup(auth, googleProvider)
         .then((result) => {
             const credential : OAuthCredential | null = GoogleAuthProvider.credentialFromResult(result);
-            const token : string | undefined = credential?.accessToken;
-            setCurrentUser(result.user);
-            navigate("/first-time")
+            //const token : string | undefined = credential?.accessToken;
+            setUserInfo({currentUser: result.user, additionalInfo: getAdditionalUserInfo(result)});
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
@@ -48,7 +54,7 @@ export function GAuthProvider({ children } : any) {
     }
 
     const value : IAuthContext = {
-        currentUser,
+        userInfo,
         login,
         signout
     }
