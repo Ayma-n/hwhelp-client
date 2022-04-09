@@ -2,6 +2,8 @@ import React from 'react'
 import Button from '@mui/material/Button'
 import './HomeStyle.css'
 
+import { useAuth } from './contexts/AuthContext'
+
 type HomeProps = {
     signedIn: boolean;
 }
@@ -16,4 +18,8 @@ export default function Home(props: HomeProps) {
     }}variant="contained" className="w-30 h-16">Sign In With Google</Button>
   </div>
   </>)
+}
+
+function handleLoginPressed() {
+    const { login, signout, currentUser } = useAuth();
 }

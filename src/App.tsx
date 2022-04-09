@@ -2,14 +2,17 @@ import React from 'react';
 import logo from './logo.svg';
 import Home from './Home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
   return (<>
     <div id="App">
       <Router>
+        <AuthProvider>
         <Routes>
           <Route path="/" element={<Home signedIn={false}></Home>}/>
         </Routes>
+        </AuthProvider>
       </Router>
       <Home signedIn={false}></Home>
     </div>
