@@ -1,15 +1,23 @@
 export interface Person {
-    firstName: string | null;
-    lastName: string | null;
-    email: string | null;
-    id: string | null; 
-    university: string | null;
-  }
-  
+  firstName: string | null,
+  lastName: string | null,
+  email: string | null,
+  id: string | null,
+  university: string | null,
+}
+
 export const nullPerson: Person = {
   firstName: null,
   lastName: null,
   email: null,
   id: null,
-  university: null
+  university: null,
+};
+
+export interface IDBContext {
+  createUser: Function,
+}
+
+export const nullDBContext: IDBContext = {
+  createUser: () => null,
 };
