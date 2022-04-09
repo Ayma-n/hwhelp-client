@@ -5,10 +5,10 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { useAuth } from "./AuthContext";
-import {Person, nullPerson} from "./types/DBTypes";
+import {Person, nullPerson, IDBContext, nullDBContext} from "./types/DBTypes";
 
 
-const DatabaseContext: React.Context<Person> = React.createContext(nullPerson);
+const DatabaseContext: React.Context<IDBContext> = React.createContext(nullDBContext);
 
 export function useDb() {
   return useContext(DatabaseContext);
@@ -19,7 +19,8 @@ export const DatabaseProvider: FC = ({ children }) => {
   const currentUser = userInfo?.currentUser;
 
   function createUser(userObject: any) {
-    const profilesRef = collection(db, "/profiles");
+    const collectionName = userObject.role === 'student' ? '/students' : '/tutors';
+    const profilesRef = collection(db, collectionName);
     return addDoc(profilesRef, userObject);
   }
 
