@@ -60,7 +60,7 @@ export default function Chat() {
           style={{ marginRight: 4 }}
           placeholder="hello!"
         />
-        <Button id="send-button" variant="contained">
+        <Button id="send-button" onClick={handleFormSubmit} variant="contained">
           Send
         </Button>
       </form>
