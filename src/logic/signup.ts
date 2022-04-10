@@ -6,8 +6,7 @@ export function signupForm(useDb: Function, useAuth: Function) {
   const { createUser } = useDb();
   const { userInfo } = useAuth();
   const currentUser = userInfo?.currentUser;
-  const firstName = currentUser.displayName.split(" ")[0];
-  const lastName = currentUser.displayName.split(" ")[1];
+  const displayName = currentUser.displayName.split;
   const email = currentUser.email;
 
   document.querySelector("#signup-form")?.addEventListener("submit", (e) => {
@@ -19,7 +18,7 @@ export function signupForm(useDb: Function, useAuth: Function) {
     // add data to firestore
     createUser({
       email: email,
-      firstName: firstName,
+      firstName: displayName,
       lastName: lastName,
       university: school,
       role: role,

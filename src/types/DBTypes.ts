@@ -3,7 +3,7 @@ export interface Person {
   email: string | null,
   institution: string | null,
   role: string | null,
-  expertise: string | null,
+  expertise: Array<string> | null,
   uid: string | null
 }
 
