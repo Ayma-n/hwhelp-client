@@ -1,22 +1,19 @@
 import React from "react";
 
 export default function Chat() {
+    const messageForm: HTMLFormElement = document.querySelector("#message-form") as HTMLFormElement;
+    const messageInput: HTMLInputElement  = document.querySelector("#message-input") as HTMLInputElement;
+
+    messageForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const message = messageInput.value;
+    // sendMsg(message);
+    messageInput.value = "";
+  });
+
   return (
     <div id="Chat">
       <div id="message-container"></div>
-      <div id="name-div">
-        <form id="name-form">
-          <input
-            id="name-input"
-            className="border-2 border-blue border-solid rounded-md p-0.5 pr-0"
-            placeholder="Enter Your Name"
-            type="text"
-          />
-          <button id="name-submit" className="text-white">
-            Submit
-          </button>
-        </form>
-      </div>
       <form id="send-container">
         <input
           type="text"

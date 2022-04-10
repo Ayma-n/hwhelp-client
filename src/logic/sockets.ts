@@ -34,9 +34,9 @@ export function connectToServerAndEnterQueue(personObj: PersonQueue) {
   });
 }
 
-export function sendMsg(msg: string, socket: Socket) {
-//   socket.emit("private message", {
-//     content: msg,
-//     to: connectedUserId,
-//   });
+export function sendMsg(msg: string, socket: Socket, connectedUserId: string) {
+  socket.emit("private message", {
+    content: msg,
+    to: connectedUserId,
+  });
 }

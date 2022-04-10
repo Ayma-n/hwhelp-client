@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import Home from './Home'
+import Chat from './Chat';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { GAuthProvider } from './contexts/AuthContext';
 import { DatabaseProvider } from './contexts/DatabaseContext';
@@ -14,6 +15,7 @@ function App() {
         <GAuthProvider>
           <DatabaseProvider>
         <Routes>
+          <Route path="/chat" element={<Chat></Chat>}/>
           <Route path="/" element={<Home signedIn={false}></Home>}/>
           <Route path="/first-time" element={<FirstTime></FirstTime>}/>
           <Route path="/waiting-room" element={<WaitingRoom></WaitingRoom>}/>
