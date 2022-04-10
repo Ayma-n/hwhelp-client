@@ -4,21 +4,26 @@ import { connectToServerAndEnterQueue } from "./logic/sockets";
 import { useAuth } from "./contexts/AuthContext";
 import { useDb } from "./contexts/DatabaseContext";
 import { Person } from "./types/DBTypes";
+import { useNavigate } from "react-router-dom";
 
 export default function WaitingRoom() {
   const { userInfo } = useAuth();
   const { getProfileData } = useDb();
+  const navigate = useNavigate();
 
   const [matchedPerson, setMatchedPerson] = useState<any>();
 
   useEffect(() => {
-    console.log("user info", userInfo);
-    console.log(getProfileData(userInfo?.currentUser.uid));
+    if (!userInfo) {
+        navigate("/")
+        return;
+    }
     getProfileData(userInfo?.currentUser.uid).then((profileData: any) => {
-      //console.log("profile data ", profileData);
-      connectToServerAndEnterQueue(profileData).then((personObject) => {
+      console.log("profile data ", profileData);
+      connectToServerAndEnterQueue(profileData)
+      .then((personObject) => {
           setMatchedPerson(personObject);
-      });
+      })
     });
   }, []);
 
