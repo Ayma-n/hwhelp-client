@@ -29,6 +29,7 @@ export function connectToServerAndEnterQueue(personObj: PersonQueue) {
   })
 
   const matchedPerson = new Promise<any>((resolve, reject) => {
+    console.log("promise initiated");
     socket.on("waiting for queue", (req, res) => {
       console.log("response from match: ", req);
         console.log("you have connected with: ", req.displayName);

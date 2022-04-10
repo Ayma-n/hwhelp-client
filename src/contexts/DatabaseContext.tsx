@@ -38,7 +38,7 @@ export const DatabaseProvider: FC = ({ children }) => {
       docs.push(doc.data());
     });
 
-    return docs[0];
+    return docs[0] 
   }
 
   const value: any = {
