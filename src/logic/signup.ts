@@ -13,8 +13,8 @@ export function signupForm() {
   document.querySelector("#signup-form")?.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const school = (<HTMLInputElement>document.querySelector("#school")).value;
-    const role = (<HTMLInputElement>document.querySelector("#role")).value;
+    const school = (<HTMLInputElement>document.querySelector("#school-form")).value;
+    const role = (<HTMLInputElement>document.querySelector("#radio-form")).value;
 
     // add data to firestore
     createUser({

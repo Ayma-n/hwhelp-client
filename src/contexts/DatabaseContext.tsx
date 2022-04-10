@@ -5,7 +5,7 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { useAuth } from "./AuthContext";
-import {Person, nullPerson, IDBContext, nullDBContext} from "./types/DBTypes";
+import {Person, nullPerson, IDBContext, nullDBContext} from "../types/DBTypes";
 
 
 const DatabaseContext: React.Context<IDBContext> = React.createContext(nullDBContext);
@@ -18,7 +18,7 @@ export const DatabaseProvider: FC = ({ children }) => {
   const { userInfo } = useAuth();
   const currentUser = userInfo?.currentUser;
 
-  function createUser(userObject: any) {
+  function createUser(userObject: Person) {
     const collectionName = userObject.role === 'student' ? '/students' : '/tutors';
     const profilesRef = collection(db, collectionName);
     return addDoc(profilesRef, userObject);

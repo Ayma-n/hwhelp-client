@@ -36,6 +36,7 @@ export default function FirstTime() {
       <RadioGroup
       defaultValue={"student"}
       onChange={handleChange}
+      id="role-form"
       >
         <FormControlLabel value="student" control={<Radio/>} label="Student"/>
         <FormControlLabel value="tutor" control={<Radio/>} label="Tutor"/>

@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* * {
+box-sizing: border-box;
+font-family: Inter, sans-serif;
+font-weight: 400;
+font-size: 21px;
+} */
+
+
+  
+  #message-container div:nth-child(2n) {
+    /* background-color: #FFF; */
+  }
+
+  #name-div {
+      left: 50vw;
+      position: absolute;
+      top: 50vh;
+      transform: translate(-50%, -50%);
+      /* font-size: 40px; */
+      display: flex;
+      /* height: 400px; */
+  }
+
+  #name-form > * {
+    height: 100%;
+    /* width: 100%; */
+    position: relative;
+    font-size: 30px;
+  }
+
+  /* #name-input {
+      padding-left: 10px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border: 1px solid gray;
+      border-radius: 10px;
+  } */
+  #name-form > #name-submit {
+      border-radius: 10px;
+      background-color: cyan;
+      border: none;
+      padding-left: 20px;
+      padding-right: 20px;
+  }
+
+  #send-container {
+    position: fixed;
+    padding-bottom: 30px;
+    bottom: 0;
+    background-color: white;
+    max-width: 1200px;
+    width: 80%;
+    display: none;
+  }
+
+  #message-input {
+    flex-grow: 1;
+  }
+
+  
+  #message-container div {
+    /* background-color: #CCC; */
+   
+  }
+
+/* code for container that holds the conversation */
+  #message-container {
+    width: 80%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* common code shared between sent and recieved messages */
+  .message {
+    padding: 10px 10px;
+    /* width: min-content; */
+    margin: 4px 0;
+    border-radius: 8px;
+    
+    color: #fff;
+    position: relative;
+    font-weight: 300;
+    font-size: 14px;
+    text-align: left;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    max-width: 323px;
+    justify-content: flex-start;
+    width: fit-content;
+    gap: 15px;
+
+  }
+
+  .name-span {
+    font-weight: 400;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .name-span::after {
+    content: "\a";
+    white-space: pre;
+  
+  }
+
+  .profile-img {
+    align-self: flex-start;
+    width: 51px;
+    margin-right: 20px;
+  }
+
+  .else-comment-div {
+    display: flex;
+  }
+
+  .text-div {
+    /* align-self: flex-start;
+    justify-self: flex-start; */
+    word-wrap: break-word;
+    position: relative;
+    /* width: fit-content; */
+    max-width: 220px;
+    margin-bottom: 20px;
+    font-weight: 200;
+    /* width: min-content; */
+  }
+
+  .time-div {
+    align-self: flex-end;
+    justify-self: flex-end;
+    position: relative;
+    min-width:70px;
+    font-size: 15px;
+    font-weight: 300;
+
+
+  }
+
+
+  .my-message {
+    background: #007AFF;
+    align-self: flex-end;
+  }
+
+  /* if my message is adjacent to sent message, increase spacing */ 
+  /* TODO: change to accomodate comment-div */
+  .my-message + .else-comment-div, .else-comment-div + .my-message  {
+    margin-top: 16px;
+  }
+
+  .else-message {
+      background: #F2F2F7;
+      color: #2C2C2E;
+  }
+
+  .sb13 + .sb13:before, .sb14 + .sb14:before {
+    display: none;
+    }
+  
+  
+  /* speech bubble 13 */
+  /* my-messge bubble */
+  .sb13:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 15px solid #007AFF;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #007AFF;
+    border-bottom: 15px solid transparent;
+    right: -16px;
+    top: 0px;
+    z-index: -1;
+    /* border-top-right-radius: 10px; */
+  }
+  
+  
+  /* speech bubble 14 */
+  /* else-message bubble */
+  .sb14:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 15px solid transparent;
+    border-right: 15px solid #F2F2F7;
+    border-top: 15px solid #F2F2F7;
+    border-bottom: 15px solid transparent;
+    left: -16px;
+    top: 0px;
+    z-index: -1;
+  }
+  
