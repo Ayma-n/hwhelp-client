@@ -38,7 +38,7 @@ export default function WaitingRoom() {
       className="m-auto h-screen flex flex-col text-center justify-center items-center"
     >
       <div className="text-3xl mb-4">
-        Please wait while we match you with a tutor...
+        Please wait while we match you with a peer...
       </div>
       <CircularProgress />
       <Button
