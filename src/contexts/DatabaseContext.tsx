@@ -19,7 +19,7 @@ export const DatabaseProvider: FC = ({ children }) => {
   const currentUser = userInfo?.currentUser;
 
   function createUser(userObject: Person) {
-    const collectionName = userObject.role === 'student' ? '/students' : '/tutors';
+    const collectionName = userObject.role === 'student' ? '/Students' : '/Tutors';
     const profilesRef = collection(db, collectionName);
     return addDoc(profilesRef, userObject);
   }

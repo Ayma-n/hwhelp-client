@@ -5,12 +5,15 @@ import { useAuth } from './contexts/AuthContext'
 import { User } from 'firebase/auth';
 import { useDb } from './contexts/DatabaseContext'
 import { FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, Select, TextField, Autocomplete, createFilterOptions, Checkbox, FormGroup, Button } from '@mui/material';
+import { Person } from './types/DBTypes';
 
 import usInstitutions from "./local-data/us_institutions_list.json"
+import { logRoles } from '@testing-library/react';
 
-type FormData = {
+interface IFormData {
   role: string,
-  choices: string[]
+  institution: string,
+  expertise: string[]
 }
 
 export default function FirstTime() {
@@ -18,7 +21,7 @@ export default function FirstTime() {
   const { userInfo } = useAuth();
   const { createUser } = useDb();
 
-  const [formData, setFormData] = useState<FormData>({role: "", choices: []});
+  const [formData, setFormData] = useState<IFormData>({role: "student", institution: "", expertise: []});
 
   const filterOptions = createFilterOptions({
     matchFrom: 'any',
@@ -30,6 +33,8 @@ export default function FirstTime() {
     const newFormData = formData;
     newFormData.role = e.target.value;
     setFormData(newFormData);
+
+    console.log(e.target.value);
 
     const studentOptions = document.getElementById("student-options");
     const tutorOptions = document.getElementById("tutor-options")
@@ -54,18 +59,30 @@ export default function FirstTime() {
   const handleOptionsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFormData = formData;
     if (e.target.checked) {
-      newFormData.choices.push(e.target.name)
+      newFormData.expertise.push(e.target.name)
     } else {
-      newFormData.choices.splice(newFormData.choices.indexOf(e.target.name));
+      newFormData.expertise.splice(newFormData.expertise.indexOf(e.target.name));
     }  
-    console.log(newFormData)
-
-    //setFormData(newFormData);
+    setFormData(newFormData);
   }
 
-  const submitUserPreferences = () => {
-    const userRole = document.getElementById("user-role")?.nodeValue;
-    console.log(userRole);
+  const handleUniSelection = (e: React.SyntheticEvent, value : any) => {
+    const newFormData = formData;
+    newFormData.institution = value;
+    setFormData(newFormData);
+  }
+
+  const submitUserInfo = () => {
+
+    const personObject : Person = {
+      displayName: userInfo?.currentUser.displayName,
+      email: userInfo?.currentUser.email,
+      institution: formData.institution,
+      role: formData.role,
+      expertise: formData.expertise,
+      uid: userInfo?.currentUser.uid
+    }
+    createUser(personObject);
   }
 
   return (<>
@@ -87,6 +104,7 @@ export default function FirstTime() {
         <Autocomplete
           disablePortal
           filterOptions={filterOptions}
+          onChange={handleUniSelection}
           id="uni-list"
           options={usInstitutions.sort()}
           renderInput={(params) => <TextField {...params} label="College or University" />}
@@ -106,7 +124,7 @@ export default function FirstTime() {
         </FormGroup>
       </div>
 
-      <Button onClick={submitUserPreferences} style={{
+      <Button onClick={submitUserInfo} style={{
         borderRadius: 10,
         backgroundColor: "#22c55e",
         color: "white",
