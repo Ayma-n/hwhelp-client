@@ -3,7 +3,7 @@ import { useNavigate, Navigate } from 'react-router-dom';
 
 import { useAuth } from './contexts/AuthContext'
 import { User } from 'firebase/auth';
-import { FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, Select, TextField, Autocomplete, createFilterOptions, Checkbox, FormGroup } from '@mui/material';
+import { FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, Select, TextField, Autocomplete, createFilterOptions, Checkbox, FormGroup, Button } from '@mui/material';
 
 import usInstitutions from "./local-data/us_institutions_list.json"
 
@@ -28,7 +28,7 @@ export default function FirstTime() {
 
     const studentOptions = document.getElementById("student-options");
     const tutorOptions = document.getElementById("tutor-options")
-    
+
     if (e.target.value == "student") {
       if (studentOptions && tutorOptions) {
         studentOptions.classList.add("block")
@@ -74,15 +74,21 @@ export default function FirstTime() {
 
       <div className="hidden" id="tutor-options">
         <FormLabel>Select your areas of expertise:</FormLabel>
-          <FormGroup>
-            <FormControlLabel control={<Checkbox />} label="Mathematics"/>
-            <FormControlLabel control={<Checkbox />} label="Computer Science"/>
-            <FormControlLabel control={<Checkbox />} label="Physics"/>
-            <FormControlLabel control={<Checkbox />} label="Chemistry"/>
-            <FormControlLabel control={<Checkbox />} label="Economics"/>
-            <FormControlLabel control={<Checkbox />} label="Sociology"/>
-          </FormGroup>
+        <FormGroup>
+          <FormControlLabel control={<Checkbox />} label="Mathematics" />
+          <FormControlLabel control={<Checkbox />} label="Computer Science" />
+          <FormControlLabel control={<Checkbox />} label="Physics" />
+          <FormControlLabel control={<Checkbox />} label="Chemistry" />
+          <FormControlLabel control={<Checkbox />} label="Economics" />
+          <FormControlLabel control={<Checkbox />} label="Sociology" />
+        </FormGroup>
       </div>
+
+      <Button style={{
+        borderRadius: 10,
+        backgroundColor: "#22c55e",
+        color: "white",
+      }}>Complete Registration</Button>
     </div>
   </>)
 }

@@ -510,6 +510,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   justify-content: center;
 }
 
+.to-white {
+  --tw-gradient-to: #fff;
+}
+
 .text-center {
   text-align: center;
 }
