@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { GAuthProvider } from './contexts/AuthContext';
 import { DatabaseProvider } from './contexts/DatabaseContext';
 import FirstTime from './FirstTime';
+import WaitingRoom from './WaitingRoom';
 
 function App() {
   return (<>
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home signedIn={false}></Home>}/>
           <Route path="/first-time" element={<FirstTime></FirstTime>}/>
+          <Route path="/waiting-room" element={<WaitingRoom></WaitingRoom>}/>
         </Routes>
         </DatabaseProvider>
         </GAuthProvider>

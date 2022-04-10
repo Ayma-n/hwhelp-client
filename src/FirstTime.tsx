@@ -85,12 +85,12 @@ export default function FirstTime() {
       uid: userInfo?.currentUser.uid
     }
     await createUser(personObject);
-    navigate("/");
+    navigate("/waiting-room");
   }
 
   return (<>
     <div id="first-time-page">
-      {userInfo?.additionalInfo.isNewUser ? <div className="text-4xl">Welcome, {userInfo?.currentUser.displayName}!</div> : <Navigate to="/"></Navigate>}
+      {userInfo?.additionalInfo.isNewUser ? <div className="text-4xl">Welcome, {userInfo?.currentUser.displayName}!</div> : <Navigate to="/waiting-room"></Navigate>}
       {/* <div className="text-4xl">Welcome, {userInfo?.currentUser.displayName}!</div> */}
       <FormLabel>Are you using HW-Help as a:</FormLabel>
       <RadioGroup
