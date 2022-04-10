@@ -16,7 +16,6 @@ export default function Home(props: HomeProps) {
 
     async function handleLoginPressed() {
         await login();
-        console.log(userInfo?.additionalInfo.isNewUser)
         //if (userInfo?.additionalInfo.isNewUser) navigate("/first-time");
         navigate("/first-time");
     }

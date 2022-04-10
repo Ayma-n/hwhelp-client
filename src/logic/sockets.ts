@@ -17,25 +17,15 @@ export function connectToServerAndEnterQueue(personObj: PersonQueue) {
   });
 
   socket.connect();
-  // TODO: combine to same channel
-  console.log("personObj: ", personObj);
   socket.emit("setup info for queue", personObj);
   //catch all listener for debugging
-  socket.onAny((event, ...args) => {
-    console.log(event, args);
-  });
 
-  socket.on("test", (req, res) => {
-      console.log("received req", req);
-  })
 
   const matchedPerson = new Promise<any>((resolve, reject) => {
-    console.log("promise initiated");
     socket.on("waiting for queue", (req, res) => {
-      console.log("response from match: ", req);
-        console.log("you have connected with: ", req.displayName);
         connectedUserId = req.socketId;
         listenForMessages(req.displayName);
+        addVideoEventListener();
         resolve(req)
     });
   })
@@ -46,7 +36,6 @@ export function connectToServerAndEnterQueue(personObj: PersonQueue) {
 
 function listenForMessages(name: string) {
   socket.on("private message", (req, res) => {
-    console.log("received message: ", req.content);
     showChatMessage(req.content, name);
   });
 }
@@ -56,4 +45,30 @@ export function sendMsg(msg: string) {
     content: msg,
     to: connectedUserId,
   });
+}
+var peerIdObj: any;
+
+export function sendVideoRequest() {
+  socket.emit("caller setup", connectedUserId);
+  socket.on("caller response", (req, res) => {
+    peerIdObj = req;
+  });
+}
+var peerId: string;
+export function addVideoEventListener() {
+  socket.on("receive response", (req, res) => {
+    peerId = req;
+
+  })
+}
+
+export function getPeerId() {
+  return peerId;
+}
+export function getPeerIdObj() {
+  return peerIdObj;
+}
+
+export function getCurrentUserId() {
+  return socket.id;
 }

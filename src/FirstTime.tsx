@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
 
 import { useAuth } from './contexts/AuthContext'
-import { User } from 'firebase/auth';
 import { useDb } from './contexts/DatabaseContext'
-import { FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, Select, TextField, Autocomplete, createFilterOptions, Checkbox, FormGroup, Button } from '@mui/material';
+import { FormControlLabel, FormLabel, Radio, RadioGroup, TextField, Autocomplete, createFilterOptions, Checkbox, FormGroup, Button } from '@mui/material';
 import { Person } from './types/DBTypes';
 
 import usInstitutions from "./local-data/us_institutions_list.json"
-import { logRoles } from '@testing-library/react';
 
 interface IFormData {
   role: string,
@@ -36,7 +34,6 @@ export default function FirstTime() {
     newFormData.role = e.target.value;
     setFormData(newFormData);
 
-    console.log(e.target.value);
 
     const studentOptions = document.getElementById("student-options");
     const tutorOptions = document.getElementById("tutor-options")

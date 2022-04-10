@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, createRef } from 'react'
-import Peer, { MediaConnection } from 'peerjs'
+import React, { useState, useEffect } from 'react'
+import Peer from 'peerjs'
 import { VideoPlayer } from './VideoPlayer';
 
 

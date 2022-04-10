@@ -1,7 +1,10 @@
-import React from "react";
-import { sendMsg } from "./logic/sockets";
+import React, {useState} from "react";
+import { sendMsg, sendVideoRequest } from "./logic/sockets";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+// import { getPeerId, getPeerIdObj, getCurrentUserId } from './logic/sockets';
+// import Receiver from "./Receiver";
+// import Caller from "./Caller";
 
 export function showChatMessage(message: string, sender: string) {
   const newDiv = document.createElement("div");
@@ -9,16 +12,29 @@ export function showChatMessage(message: string, sender: string) {
   document.querySelector("#message-container")?.appendChild(newDiv);
 }
 export default function Chat() {
+  // const [peerIdObj, setPeerIdObj]: any = useState({});
+  // const [callerPeerId, setCallerPeerId]: any = useState("");
+  // const [currentUserId, setCurrentUserId]: any = useState("");
+
   function handleFormSubmit(e: any) {
     e.preventDefault();
     const input: HTMLInputElement = document.querySelector(
       "#message-input"
     ) as HTMLInputElement;
-    console.log(input.value);
     sendMsg(input.value);
     showChatMessage(input.value, "Me");
     input.value = "";
   }
+
+  // function handleVideo() {
+  //   // generate peer id for video call
+  //   // send peer id to server
+  //   sendVideoRequest();
+  //   setCallerPeerId(getPeerId());
+  //   setPeerIdObj(getPeerIdObj());
+  //   setCurrentUserId(getCurrentUserId());
+
+  // }
   return (
     <div id="Chat">
       <div
@@ -48,6 +64,8 @@ export default function Chat() {
           Send
         </Button>
       </form>
+      {/* <Button id="start-video-button" variant="contained" onClick={handleVideo}>Start Video</Button>
+      {peerIdObj && peerIdObj && currentUserId===callerPeerId ? <Caller callerPeerId={callerPeerId} receiverPeerId={peerIdObj.receiverPeerId}></Caller> : <Receiver receiverPeerId={peerIdObj.receiverPeerId}></Receiver>} */}
     </div>
   );
 }

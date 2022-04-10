@@ -19,7 +19,6 @@ export default function WaitingRoom() {
         return;
     }
     getProfileData(userInfo?.currentUser.uid).then((profileData: any) => {
-      console.log("profile data ", profileData);
       connectToServerAndEnterQueue(profileData)
       .then((personObject) => {
           setMatchedPerson(personObject);
