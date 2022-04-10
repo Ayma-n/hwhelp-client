@@ -23,7 +23,7 @@ export default function Chat() {
     <div id="Chat">
       <div
         id="message-container"
-        className="h-90 overflow-scroll absolute b-1 text-center w-32 mx-auto container"
+        className="h-90 overflow-scroll absolute b-1 text-center mx-auto container flex-col-reverse justify-end"
       ></div>
       <form
         id="send-container"
