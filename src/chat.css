@@ -152,7 +152,6 @@ font-size: 21px;
   }
 
   /* if my message is adjacent to sent message, increase spacing */ 
-  /* TODO: change to accomodate comment-div */
   .my-message + .else-comment-div, .else-comment-div + .my-message  {
     margin-top: 16px;
   }
