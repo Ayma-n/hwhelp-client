@@ -29,7 +29,7 @@ export default function WaitingRoom() {
 
   useEffect(() => {
     if (matchedPerson) {
-      setTimeout(() => navigate("/chat"), 3000);
+      setTimeout(() => navigate("/chat"), 1000);
     }
   }, [matchedPerson]);
 
