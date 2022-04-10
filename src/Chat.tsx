@@ -1,23 +1,23 @@
 import React from "react";
+import { sendMsg } from "./logic/sockets";
 
+export function showChatMessage(message: string) {
+  const newDiv = document.createElement("div");
+  newDiv.innerText = message;
+  document.querySelector("#message-container")?.appendChild(newDiv);
+}
 export default function Chat() {
+
+  function handleFormSubmit(e: any) {
+    e.preventDefault();
+    const input: HTMLInputElement = document.querySelector("#message-input") as HTMLInputElement;
+    sendMsg(input.value);
+    input.value = "";
+  }
   return (
     <div id="Chat">
       <div id="message-container"></div>
-      <div id="name-div">
-        <form id="name-form">
-          <input
-            id="name-input"
-            className="border-2 border-blue border-solid rounded-md p-0.5 pr-0"
-            placeholder="Enter Your Name"
-            type="text"
-          />
-          <button id="name-submit" className="text-white">
-            Submit
-          </button>
-        </form>
-      </div>
-      <form id="send-container">
+      <form id="send-container" onSubmit={handleFormSubmit}>
         <input
           type="text"
           id="message-input"
