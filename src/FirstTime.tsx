@@ -1,30 +1,35 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import { useAuth } from './contexts/AuthContext'
 import { User } from 'firebase/auth';
+import { useDb } from './contexts/DatabaseContext'
 import { FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, Select, TextField, Autocomplete, createFilterOptions, Checkbox, FormGroup, Button } from '@mui/material';
 
 import usInstitutions from "./local-data/us_institutions_list.json"
 
+type FormData = {
+  role: string,
+  choices: string[]
+}
+
 export default function FirstTime() {
 
   const { userInfo } = useAuth();
-  const navigate = useNavigate();
+  const { createUser } = useDb();
 
-  const [valueA, setValueA] = useState("Student")
+  const [formData, setFormData] = useState<FormData>({role: "", choices: []});
 
   const filterOptions = createFilterOptions({
     matchFrom: 'any',
     limit: 500,
   })
 
-  //useEffect(generateUniversityOptions, [])
+  const handleRoleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
-    console.log("THERE WAS A CHNAGE AHAHHAHAHAHA")
-    console.log(e.target.value);
+    const newFormData = formData;
+    newFormData.role = e.target.value;
+    setFormData(newFormData);
 
     const studentOptions = document.getElementById("student-options");
     const tutorOptions = document.getElementById("tutor-options")
@@ -44,18 +49,34 @@ export default function FirstTime() {
         studentOptions.classList.add("hidden")
       }
     }
+  }
 
-    setValueA((e.target as HTMLInputElement).value)
+  const handleOptionsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newFormData = formData;
+    if (e.target.checked) {
+      newFormData.choices.push(e.target.name)
+    } else {
+      newFormData.choices.splice(newFormData.choices.indexOf(e.target.name));
+    }  
+    console.log(newFormData)
+
+    //setFormData(newFormData);
+  }
+
+  const submitUserPreferences = () => {
+    const userRole = document.getElementById("user-role")?.nodeValue;
+    console.log(userRole);
   }
 
   return (<>
     <div id="first-time-page">
-      {/* {userInfo?.additionalInfo.isNewUser ? <div className="text-4xl">Welcome, {userInfo?.currentUser.displayName}!</div> : <Navigate to="/"></Navigate>} */}
-      <div className="text-4xl">Welcome, {userInfo?.currentUser.displayName}!</div>
+      {userInfo?.additionalInfo.isNewUser ? <div className="text-4xl">Welcome, {userInfo?.currentUser.displayName}!</div> : <Navigate to="/"></Navigate>}
+      {/* <div className="text-4xl">Welcome, {userInfo?.currentUser.displayName}!</div> */}
       <FormLabel>Are you using HW-Help as a:</FormLabel>
       <RadioGroup
         defaultValue={"student"}
-        onChange={handleChange}
+        onChange={handleRoleChange}
+        id="user-role"
       >
         <FormControlLabel value="student" control={<Radio />} label="Student" />
         <FormControlLabel value="tutor" control={<Radio />} label="Tutor" />
@@ -74,17 +95,18 @@ export default function FirstTime() {
 
       <div className="hidden" id="tutor-options">
         <FormLabel>Select your areas of expertise:</FormLabel>
-        <FormGroup>
-          <FormControlLabel control={<Checkbox />} label="Mathematics" />
-          <FormControlLabel control={<Checkbox />} label="Computer Science" />
-          <FormControlLabel control={<Checkbox />} label="Physics" />
-          <FormControlLabel control={<Checkbox />} label="Chemistry" />
-          <FormControlLabel control={<Checkbox />} label="Economics" />
-          <FormControlLabel control={<Checkbox />} label="Sociology" />
+        <FormGroup
+        onChange={handleOptionsChange}>
+          <FormControlLabel control={<Checkbox name="math" />} label="Mathematics" />
+          <FormControlLabel control={<Checkbox name="cs" />} label="Computer Science" />
+          <FormControlLabel control={<Checkbox name="phys" />} label="Physics" />
+          <FormControlLabel control={<Checkbox name="chem" />} label="Chemistry" />
+          <FormControlLabel control={<Checkbox name="econ" />} label="Economics" />
+          <FormControlLabel control={<Checkbox name="soc" />} label="Sociology" />
         </FormGroup>
       </div>
 
-      <Button style={{
+      <Button onClick={submitUserPreferences} style={{
         borderRadius: 10,
         backgroundColor: "#22c55e",
         color: "white",
