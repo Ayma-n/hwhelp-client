@@ -35,7 +35,7 @@ export function connectToServerAndEnterQueue(personObj: PersonQueue) {
       console.log("response from match: ", req);
         console.log("you have connected with: ", req.displayName);
         connectedUserId = req.socketId;
-        listenForMessages();
+        listenForMessages(req.displayName);
         resolve(req)
     });
   })
@@ -44,10 +44,10 @@ export function connectToServerAndEnterQueue(personObj: PersonQueue) {
 
 }
 
-function listenForMessages() {
+function listenForMessages(name: string) {
   socket.on("private message", (req, res) => {
-    console.log("received message: ", req);
-    showChatMessage(req);
+    console.log("received message: ", req.content);
+    showChatMessage(req.content, name);
   });
 }
 

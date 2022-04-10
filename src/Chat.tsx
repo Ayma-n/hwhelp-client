@@ -1,9 +1,9 @@
 import React from "react";
 import { sendMsg } from "./logic/sockets";
 
-export function showChatMessage(message: string) {
+export function showChatMessage(message: string, sender: string) {
   const newDiv = document.createElement("div");
-  newDiv.innerText = message;
+  newDiv.innerText = sender + ': ' + message;
   document.querySelector("#message-container")?.appendChild(newDiv);
 }
 export default function Chat() {
@@ -12,6 +12,7 @@ export default function Chat() {
     e.preventDefault();
     const input: HTMLInputElement = document.querySelector("#message-input") as HTMLInputElement;
     sendMsg(input.value);
+    showChatMessage(input.value, "Me");
     input.value = "";
   }
   return (
