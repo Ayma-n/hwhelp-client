@@ -7,7 +7,7 @@ const messageInput: HTMLInputElement  = document.querySelector("#message-input")
 messageForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const message = messageInput.value;
-    sendMsg(message);
+    // sendMsg(message);
     messageInput.value = "";
   });
 }

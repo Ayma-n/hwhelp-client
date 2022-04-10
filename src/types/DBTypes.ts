@@ -18,8 +18,10 @@ export const nullPerson: Person = {
 
 export interface IDBContext {
   createUser: (person: Person) => void,
+  getProfileData: (uid: string) => any,
 }
 
 export const nullDBContext: IDBContext = {
   createUser: () => null,
+  getProfileData: (uid) => null,
 };
