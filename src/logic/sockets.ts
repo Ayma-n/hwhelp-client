@@ -1,6 +1,8 @@
 import { io } from "socket.io-client";
 import { PersonQueue } from "../types/QueueTypes";
-const SERVER_URL = "http://localhost:3000";
+
+const SERVER_URL = process.env.SERVER_URL || "http://localhost:5000";
+
 const socket = io(SERVER_URL, { autoConnect: false });
 
 socket.on("connection", () => {
