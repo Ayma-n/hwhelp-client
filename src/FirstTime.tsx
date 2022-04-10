@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { useAuth } from './contexts/AuthContext'
 import { User } from 'firebase/auth';
@@ -20,6 +20,8 @@ export default function FirstTime() {
 
   const { userInfo } = useAuth();
   const { createUser } = useDb();
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState<IFormData>({role: "student", institution: "", expertise: []});
 
@@ -72,7 +74,7 @@ export default function FirstTime() {
     setFormData(newFormData);
   }
 
-  const submitUserInfo = () => {
+  const submitUserInfo = async () => {
 
     const personObject : Person = {
       displayName: userInfo?.currentUser.displayName,
@@ -82,7 +84,8 @@ export default function FirstTime() {
       expertise: formData.expertise,
       uid: userInfo?.currentUser.uid
     }
-    createUser(personObject);
+    await createUser(personObject);
+    navigate("/");
   }
 
   return (<>
