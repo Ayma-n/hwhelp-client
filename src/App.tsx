@@ -6,6 +6,8 @@ import { GAuthProvider } from './contexts/AuthContext';
 import { DatabaseProvider } from './contexts/DatabaseContext';
 import FirstTime from './FirstTime';
 import WaitingRoom from './WaitingRoom';
+import AVRoom from './AVRoom';
+import AVRoomPeer from './AVRoomPeer';
 
 function App() {
   return (<>
@@ -17,6 +19,8 @@ function App() {
           <Route path="/" element={<Home signedIn={false}></Home>}/>
           <Route path="/first-time" element={<FirstTime></FirstTime>}/>
           <Route path="/waiting-room" element={<WaitingRoom></WaitingRoom>}/>
+          <Route path="/avroom" element={<AVRoom></AVRoom>}/>
+          <Route path="/avroompeer" element={<AVRoomPeer></AVRoomPeer>}/>
         </Routes>
         </DatabaseProvider>
         </GAuthProvider>
