@@ -1,8 +1,8 @@
-import { db } from "../FirebaseInit";
-import { useAuth } from "../contexts/AuthContext";
-import { useDb } from "../contexts/DatabaseContext";
+// import { db } from "../FirebaseInit";
+// import { useAuth } from "../contexts/AuthContext";
+// import { useDb } from "../contexts/DatabaseContext";
 
-export function signupForm() {
+export function signupForm(useDb: Function, useAuth: Function) {
   const { createUser } = useDb();
   const { userInfo } = useAuth();
   const currentUser = userInfo?.currentUser;
@@ -13,8 +13,8 @@ export function signupForm() {
   document.querySelector("#signup-form")?.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const school = (<HTMLInputElement>document.querySelector("#school")).value;
-    const role = (<HTMLInputElement>document.querySelector("#role")).value;
+    const school = (<HTMLInputElement>document.querySelector("#school-form")).value;
+    const role = (<HTMLInputElement>document.querySelector("#radio-form")).value;
 
     // add data to firestore
     createUser({
