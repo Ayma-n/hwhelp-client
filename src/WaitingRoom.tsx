@@ -1,24 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, CircularProgress } from "@mui/material";
 import { connectToServerAndEnterQueue } from "./logic/sockets";
 import { useAuth } from "./contexts/AuthContext";
 import { useDb } from "./contexts/DatabaseContext";
+import { Person } from "./types/DBTypes";
 
 export default function WaitingRoom() {
   const { userInfo } = useAuth();
   const { getProfileData } = useDb();
 
+  const [matchedPerson, setMatchedPerson] = useState<any>();
+
   useEffect(() => {
     console.log("user info", userInfo);
     console.log(getProfileData(userInfo?.currentUser.uid));
     getProfileData(userInfo?.currentUser.uid).then((profileData: any) => {
-      console.log("profile data ", profileData);
-      connectToServerAndEnterQueue(profileData);
+      //console.log("profile data ", profileData);
+      connectToServerAndEnterQueue(profileData).then((personObject) => {
+          setMatchedPerson(personObject);
+      });
     });
   }, []);
 
-  return (
-    <div
+  return (<>
+    {!matchedPerson && <div
       id="WaitingRoom"
       className="m-auto h-screen flex flex-col text-center justify-center items-center"
     >
@@ -36,6 +41,16 @@ export default function WaitingRoom() {
       >
         Leave Queue
       </Button>
-    </div>
-  );
+    </div>}
+
+    {matchedPerson && <div
+        id="MatchedNotice"
+        className="m-auto h-screen flex flex-col text-center justify-center items-center"
+    >
+        <div className="text-5xl mb-4">
+        You were matched with {matchedPerson.displayName}!
+      </div>
+    </div>}
+
+    </>);
 }

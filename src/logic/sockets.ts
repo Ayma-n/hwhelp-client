@@ -27,11 +27,18 @@ export function connectToServerAndEnterQueue(personObj: PersonQueue) {
   socket.on("test", (req, res) => {
       console.log("received req", req);
   })
-  socket.on("waiting for queue", (req, res) => {
-    console.log("response from match: ", req);
-      console.log("you have connected with: ", req.displayName);
-      connectedUserId = req.socketId;
-  });
+
+  const matchedPerson = new Promise<any>((resolve, reject) => {
+    socket.on("waiting for queue", (req, res) => {
+      console.log("response from match: ", req);
+        console.log("you have connected with: ", req.displayName);
+        connectedUserId = req.socketId;
+        resolve(req)
+    });
+  })
+
+  return matchedPerson
+
 }
 
 export function sendMsg(msg: string, socket: Socket) {
