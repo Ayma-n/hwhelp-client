@@ -1,8 +1,8 @@
-import { db } from "../FirebaseInit";
-import { useAuth } from "../contexts/AuthContext";
-import { useDb } from "../contexts/DatabaseContext";
+// import { db } from "../FirebaseInit";
+// import { useAuth } from "../contexts/AuthContext";
+// import { useDb } from "../contexts/DatabaseContext";
 
-export function signupForm() {
+export function signupForm(useDb: Function, useAuth: Function) {
   const { createUser } = useDb();
   const { userInfo } = useAuth();
   const currentUser = userInfo?.currentUser;

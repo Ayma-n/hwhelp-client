@@ -1,17 +1,19 @@
 export interface Person {
-  firstName: string | null,
-  lastName: string | null,
+  displayName: string | null,
   email: string | null,
-  university: string | null,
+  institution: string | null,
   role: string | null,
+  expertise: string | null,
+  uid: string | null
 }
 
 export const nullPerson: Person = {
-  firstName: null,
-  lastName: null,
+  displayName: null,
   email: null,
-  university: null,
-  role: null
+  institution: null,
+  role: null,
+  expertise: null,
+  uid: null
 };
 
 export interface IDBContext {

@@ -10,16 +10,16 @@ socket.on("connection", () => {
 });
 
 var connectedUserId: string | null = null;
-
+// TODO: call this function
 export function connectToServerAndEnterQueue(personObj: PersonQueue) {
   socket.connect();
   // TODO: combine to same channel
   socket.emit("setup info for queue", personObj);
   socket.on("waiting for queue", (req, res) => {
     console.log(res);
-    res.then((userId: string) => {
-      console.log("you have connected with someone!");
-      connectedUserId = userId;
+    res.then((userObj: any) => {
+      console.log("you have connected with: ", userObj.firstName);
+      connectedUserId = userObj.socketId;
     });
   });
 }
